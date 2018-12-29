@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Ansible role to install the operator framework sdk on Fedora.
 
 Requirements
 ------------
@@ -23,9 +23,18 @@ Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    ---
+    # Ansible playbook which installs the operator-framework
+    # https://github.com/operator-framework/getting-started
+    # Example: ansible-playbook -v pb_install_operator_framework.yaml -e user=your_user_here
+    - hosts: 127.0.0.1
+      connection: local
+      gather_facts: false
+      become: True
+      become_user: root
+    
       roles:
-         - { role: username.rolename, x: 42 }
+        - { role: role_install_operator_framework }
 
 License
 -------

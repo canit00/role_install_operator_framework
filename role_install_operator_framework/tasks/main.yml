@@ -50,24 +50,18 @@
     path: "/home/{{ user }}/go/src"
     state: absent
   become: false
-  tags:
-  - cni
 
 - name: prep for the Operator Framework
   file:
     path: "/home/{{ user }}/go/src/github.com/operator-framework/operator-sdk"
     state: directory
   become: false
-  tags:
-  - cni
 
 - name: clone the Operator Framework
   git:
     repo: 'https://github.com/operator-framework/operator-sdk'
     dest: "/home/{{ user }}/go/src/github.com/operator-framework/operator-sdk"
   become: false
-  tags:
-  - cni
 
 - name: install the SDK / cli
   command: "{{ item }} chdir=$GOPATH/src/github.com/operator-framework/operator-sdk"
@@ -78,6 +72,4 @@
   - "git checkout master"
   - "make dep"
   - "make install"
-  tags:
-  - cni
 
