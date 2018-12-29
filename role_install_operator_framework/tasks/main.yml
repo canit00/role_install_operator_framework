@@ -1,0 +1,83 @@
+---
+# tasks file for role_install_operator_framework
+- name: install kubectl yum repo
+  copy:
+    dest: /etc/yum.repos.d/kubernetes.repo
+    content: |
+      [kubernetes]
+      name=Kubernetes
+      baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+      enabled=1
+      gpgcheck=1
+      repo_gpgcheck=1
+      gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+    owner: root
+    group: root
+
+- name: install dependencies
+  package:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+  - dep
+  - git
+  - go
+  - docker
+  - kubectl
+  - libvirt-daemon-kvm
+  - qemu-kvm
+
+- name: add user to libvirt group
+  user:
+    name: "{{ user }}"
+    shell: /bin/bash
+    groups: libvirt
+    append: yes
+
+- name: install vm driver - (kvm2)
+  get_url:
+    url: "{{ driver_url }}"
+    dest: /usr/local/bin/
+    
+- name: install minikube
+  get_url: 
+    url: "https://storage.googleapis.com/minikube/releases/{{ mini_version }}/minikube-linux-amd64"
+    dest: /usr/local/bin/minikube
+    checksum: "{{ mini_checksum }}"
+
+- name: delete ~/go/src dir if exists
+  file:
+    path: "/home/{{ user }}/go/src"
+    state: absent
+  become: false
+  tags:
+  - cni
+
+- name: prep for the Operator Framework
+  file:
+    path: "/home/{{ user }}/go/src/github.com/operator-framework/operator-sdk"
+    state: directory
+  become: false
+  tags:
+  - cni
+
+- name: clone the Operator Framework
+  git:
+    repo: 'https://github.com/operator-framework/operator-sdk'
+    dest: "/home/{{ user }}/go/src/github.com/operator-framework/operator-sdk"
+  become: false
+  tags:
+  - cni
+
+- name: install the SDK / cli
+  command: "{{ item }} chdir=$GOPATH/src/github.com/operator-framework/operator-sdk"
+  environment:
+    GOPATH: "/home/{{ user }}/go"
+  become: false
+  with_items:
+  - "git checkout master"
+  - "make dep"
+  - "make install"
+  tags:
+  - cni
+

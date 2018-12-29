@@ -1,0 +1,5 @@
+---
+# defaults file for role_install_operator_framework
+driver_url: 'https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-kvm2'
+mini_checksum: 'sha256:3298d3183deacd9ddd3032dab113a64d863df7648d6d24693284ba4193e95b49'
+mini_version: 'v0.32.0'
