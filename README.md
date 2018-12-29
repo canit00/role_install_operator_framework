@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Ansible role to install the operator framework sdk on Fedora.
+Ansible role to install the [operator-framework](https://github.com/operator-framework/getting-started) sdk on Fedora.
 
 Requirements
 ------------
@@ -16,7 +16,13 @@ A description of the settable variables for this role should go here, including 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Set your defaults.
+
+    ---
+    # defaults file for role_install_operator_framework
+    driver_url: 'https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-kvm2'
+    mini_checksum: 'sha256:3298d3183deacd9ddd3032dab113a64d863df7648d6d24693284ba4193e95b49'
+    mini_version: 'v0.32.0'
 
 Example Playbook
 ----------------
