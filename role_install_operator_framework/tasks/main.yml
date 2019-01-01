@@ -1,5 +1,11 @@
 ---
 # tasks file for role_install_operator_framework
+# Install ansible-runner & ansible-runner-http
+- import_tasks: ansible.yaml
+  when: ansible is defined
+  tags:
+  - ansible
+
 - name: install kubectl yum repo
   copy:
     dest: /etc/yum.repos.d/kubernetes.repo
@@ -26,6 +32,7 @@
   - kubectl
   - libvirt-daemon-kvm
   - qemu-kvm
+  - podman
 
 - name: add user to libvirt group
   user:

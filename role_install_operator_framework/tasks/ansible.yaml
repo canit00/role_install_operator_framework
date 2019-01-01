@@ -1,0 +1,25 @@
+---
+- name: install dependencies
+  package:
+    name: python-ansible-runner
+    state: installed
+
+- name: prep for ansible-runner-http
+  file:
+    path: "/home/{{ user }}/git/ansible-runner-http"
+    state: directory
+  become: false
+
+- name: clone ansible-runner-http
+  git:
+    repo: 'https://github.com/ansible/ansible-runner-http.git'
+    dest: "/home/{{ user }}/git/ansible-runner-http"
+  become: false
+
+- name: install ansible-runner-http
+  command: "{{ item }} chdir=/home/{{ user }}/git/ansible-runner-http"
+  become: true
+  with_items:
+  - "chmod +x setup.py"
+  - "./setup.py install"
+

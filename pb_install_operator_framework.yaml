@@ -1,7 +1,8 @@
 ---
 # Ansible playbook which installs the operator-framework
 # https://github.com/operator-framework/getting-started
-# Example: ansible-playbook -v pb_install_operator_framework.yaml
+# Example: ansible-playbook -v pb_install_operator_framework.yaml -e user=<user_name>
+# Example using Ansible: ansible-playbook -v pb_install_operator_framework.yaml -e "ansible=True user=<user_name>" -t ansible
 - hosts: 127.0.0.1
   connection: local
   gather_facts: false
