@@ -1,6 +1,6 @@
 Deploy Registry
 ----------------
-Have not yet been able to connect to the built-in minikube registry, therefore including this quick easy deployment of a standalone registry to connect to from minikube's host.
+Have not yet been able to connect to the built-in minikube registry, therefore including this quick easy deployment of a standalone registry to connect to from minikube's host. **Make sure you disable minikube's internal registry first.**
 
 Deploy registry:
 ```
