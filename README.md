@@ -3,6 +3,8 @@ Role Name
 
 Ansible role to install the [operator-framework](https://github.com/operator-framework/getting-started) sdk on Fedora.
 
+This playbook also installs minikube as your container orchestration engine.
+
 Requirements
 ------------
 
