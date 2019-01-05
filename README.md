@@ -3,7 +3,7 @@ Role Name
 
 Ansible role to install the [operator-framework](https://github.com/operator-framework/getting-started) sdk on Fedora.
 
-It also installs kubect and minikube as your container orchestration engine.
+It also installs kubectl and minikube as your container orchestration engine.
 
 Requirements
 ------------
