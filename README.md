@@ -3,17 +3,16 @@ Role Name
 
 Ansible role to install the [operator-framework](https://github.com/operator-framework/getting-started) sdk on Fedora.
 
-This playbook also installs minikube as your container orchestration engine.
+It also installs kubect and minikube as your container orchestration engine.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+You'll need to list your dependencies for the [virtualization driver](https://github.com/kubernetes/minikube/blob/master/docs/drivers.md) minikube to consume. As well as the [checksum](https://github.com/kubernetes/minikube/releases) and [version](https://github.com/kubernetes/minikube/releases). 
 
 Role Variables
 --------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+user is the only required variable which sets your /home path and adds to the libvirt group to be able to run minikube without having to use sudo.
 
 Dependencies
 ------------
